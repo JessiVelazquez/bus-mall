@@ -1,0 +1,22 @@
+html {
+    background-color: lavenderblush;
+}
+header h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+#three-images {
+    display: flex;
+}
+
+.main-images {
+    width: 250px;
+    height: 250px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+div p {
+    text-align: center;
+}

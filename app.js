@@ -1,5 +1,10 @@
 'use strict';
 
+const imageNames = ['boots', 'dog-duck', 'tauntaun', 'breakfast', 'bathroom', 'bubblegum', 'chair', 'pet-sweep', 'scissors', 'water-can', 'wine-glass', 'bag', 'banana', 'cthulhu', 'dragon', 'pen', 'shark', 'sweep', 'unicorn', 'usb']
+
+// no repeat test:
+// const imageNames = ['boots', 'dog-duck', 'tauntaun', 'breakfast', 'bathroom', 'bubblegum']
+
 //set these at top for easy/safe use later in script
 const imageAllTag = document.getElementById('three-images');
 const imageOneTag = document.getElementById('image1');
@@ -26,27 +31,14 @@ function Picture(caption, url) {
 //declares empty array to be pushed to later
 Picture.all = [];
 
-// instantiate picture objects
-new Picture('Bag', './img/bag.jpg');
-new Picture('Banana', './img/banana.jpg');
-new Picture('Bathroom', './img/bathroom.jpg');
-new Picture('Boots', './img/boots.jpg');
-new Picture('Breakfast', './img/breakfast.jpg');
-new Picture('Bubblegum', './img/bubblegum.jpg');
-new Picture('Chair', './img/chair.jpg');
-new Picture('Cthulhu', './img/cthulhu.jpg');
-new Picture('Dog-duck', './img/dog-duck.jpg');
-new Picture('Dragon', './img/dragon.jpg');
-new Picture('Pen', './img/pen.jpg');
-new Picture('Pet-sweep', './img/pet-sweep.jpg');
-new Picture('Scissors', './img/scissors.jpg');
-new Picture('Shark', './img/shark.jpg');
-new Picture('Sweep', './img/sweep.png');
-new Picture('Tauntaun', './img/tauntaun.jpg');
-new Picture('Unicorn', './img/unicorn.jpg');
-new Picture('Usb', './img/usb.gif');
-new Picture('Water-can', './img/water-can.jpg');
-new Picture('Wine-glass', './img/wine-glass.jpg');
+function createImages() {
+    for (let i = 0; i < imageNames.length; i++) {
+        const imageName = imageNames[i];
+        new Picture(imageName, './img/' + imageName + '.jpg');
+    }
+}
+
+createImages()
 
 //will be defined soon
 let leftImageObject = null;
@@ -66,9 +58,21 @@ function pickNewImages() {
 
     shuffle(Picture.all);
 
-    leftImageObject = Picture.all[0];
-    centerImageObject = Picture.all[1];
-    rightImageObject = Picture.all[2];
+    const safeImages = [];
+
+    for (let i = 0; i <Picture.all.length; i++) {
+        const image = Picture.all[i];
+        if (image !== leftImageObject && image !== centerImageObject && image !== rightImageObject) {
+            safeImages.push(image);
+            if (safeImages.length === 3) {
+                break;
+            }
+        }
+    }
+
+    leftImageObject = safeImages[0];
+    centerImageObject = safeImages[1];
+    rightImageObject = safeImages[2];
 
     leftImageObject.displayctr += 1;
     centerImageObject.displayctr += 1;
@@ -77,6 +81,7 @@ function pickNewImages() {
     renderNewImages();
     totalClicks += 1;
 }
+
 
 function renderNewImages() {
     imageOneTag.src = leftImageObject.url;
@@ -135,4 +140,7 @@ console.log(maxClicks);
 
 
 imageAllTag.addEventListener('click', pictureClickHandler);
-resultsButton.addEventListener('click', resultsClickHandler)
+resultsButton.addEventListener('click', resultsClickHandler);
+
+// call when done
+// renderChart

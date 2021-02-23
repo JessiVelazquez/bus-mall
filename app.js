@@ -1,12 +1,16 @@
 'use strict';
 
 //set these at top for easy/safe use later in script
-const imageOneTag = document.getElementById('image1')
-const imageOneCaption = document.getElementById('image1-P')
-const imageTwoTag = document.getElementById('image2')
-const imageTwoCaption = document.getElementById('image2-P')
-const imageThreeTag = document.getElementById('image3')
-const imageThreeCaption = document.getElementById('image3-P')
+const imageAllTag = document.getElementById('three-images');
+const imageOneTag = document.getElementById('image1');
+const imageOneCaption = document.getElementById('image1-P');
+const imageTwoTag = document.getElementById('image2');
+const imageTwoCaption = document.getElementById('image2-P');
+const imageThreeTag = document.getElementById('image3');
+const imageThreeCaption = document.getElementById('image3-P');
+
+const maxClicks = 5;
+let totalClicks = 0;
 
 //image/caption constructor function
 function Picture(caption, url) {
@@ -22,68 +26,113 @@ function Picture(caption, url) {
 Picture.all = [];
 
 // instantiate picture objects
-new Picture('Bag', '.img/bag.jpg');
-new Picture('Banana', '.img/banana.jpg');
-new Picture('Bathroom', '.img/bathroom.jpg');
-new Picture('Boots', '.img/boots.jpg');
-new Picture('Breakfast', '.img/breakfast.jpg');
-new Picture('Bubblegum', '.img/bubblegum.jpg');
-new Picture('Chair', '.img/chair.jpg');
-new Picture('Cthulhu', '.img/cthulhu.jpg');
-new Picture('Dog-duck', '.img/dog-duck.jpg');
-new Picture('Dragon', '.img/dragon.jpg');
-new Picture('Pen', '.img/pen.jpg');
-new Picture('Pet-sweep', '.img/pet-sweep.jpg');
-new Picture('Scissors', '.img/scissors.jpg');
-new Picture('Shark', '.img/shark.jpg');
-new Picture('Sweep', '.img/sweep.jpg');
-new Picture('Tauntaun', '.img/tauntaun.jpg');
-new Picture('Unicorn', '.img/unicorn.jpg');
-new Picture('Usb', '.img/usb.jpg');
-new Picture('Water-can', '.img/water-can.jpg');
-new Picture('Wine-glass', '.img/wine-glass.jpg');
+new Picture('Bag', './img/bag.jpg');
+new Picture('Banana', './img/banana.jpg');
+new Picture('Bathroom', './img/bathroom.jpg');
+new Picture('Boots', './img/boots.jpg');
+new Picture('Breakfast', './img/breakfast.jpg');
+new Picture('Bubblegum', './img/bubblegum.jpg');
+new Picture('Chair', './img/chair.jpg');
+new Picture('Cthulhu', './img/cthulhu.jpg');
+new Picture('Dog-duck', './img/dog-duck.jpg');
+new Picture('Dragon', './img/dragon.jpg');
+new Picture('Pen', './img/pen.jpg');
+new Picture('Pet-sweep', './img/pet-sweep.jpg');
+new Picture('Scissors', './img/scissors.jpg');
+new Picture('Shark', './img/shark.jpg');
+new Picture('Sweep', './img/sweep.png');
+new Picture('Tauntaun', './img/tauntaun.jpg');
+new Picture('Unicorn', './img/unicorn.jpg');
+new Picture('Usb', './img/usb.gif');
+new Picture('Water-can', './img/water-can.jpg');
+new Picture('Wine-glass', './img/wine-glass.jpg');
 
 //will be defined soon
 let leftImageObject = null;
 let centerImageObject = null;
 let rightImageObject = null;
 
+function shuffle(array) {
+    for (let i = array.length -1; i > 0; i--) {
+        const j = Math.floor(Math.random() * i)
+        const temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+    }
+}
 
-function pickNewGoats() {
+function pickNewImages() {
 
-    //shuffles the deck and takes the top two "cards"
     shuffle(Picture.all);
 
     leftImageObject = Picture.all[0];
     centerImageObject = Picture.all[1];
     rightImageObject = Picture.all[2];
 
-    leftImageObject.displayctr += 1
-    centerImageObject.displayctr += 1
-    rightImageObject.displayctr += 1
-
+    leftImageObject.displayctr += 1;
+    centerImageObject.displayctr += 1;
+    rightImageObject.displayctr += 1;
 
     renderNewImages();
+    totalClicks += 1;
 }
 
 function renderNewImages() {
     imageOneTag.src = leftImageObject.url;
     imageOneTag.alt = leftImageObject.caption;
-    imageOneCaption.textContent = leftImageObject.caption
+    imageOneCaption.textContent = leftImageObject.caption;
+
+    imageTwoTag.src = centerImageObject.url;
+    imageTwoTag.alt = centerImageObject.caption;
+    imageTwoCaption.textContent = centerImageObject.caption;
+
+    imageThreeTag.src = rightImageObject.url;
+    imageThreeTag.alt = rightImageObject.caption;
+    imageThreeCaption.textContent = rightImageObject.caption;
 }
 
-function pictureClickHander(event) {
-    
-    //track what happened
-    const clickedID = event.target.id;
+function pictureClickHandler(event) {
 
-    if(clickedID === 'image1') {
-        leftImageObject.clickctr += 1
-    } else if (clickedID == 'image2') {
-        centerImageObject.clickctr += 1
-    } else if (clickedID == 'image3') {
-        rightImageObject.clickctr += 1
+    if (totalClicks <= maxClicks) {
+        const clickedID = event.target.id;
+        if(clickedID === 'image1') {
+            leftImageObject.clickctr += 1;
+        } else if (clickedID === 'image2') {
+            centerImageObject.clickctr += 1;
+        } else if (clickedID === 'image3') {
+            rightImageObject.clickctr += 1;
+        }
+    }
+
+    pickNewImages();
+}
+
+
+function renderLikes() {
+    const likesListELem = document.getElementById('Results');
+    likesListELem.innerHTML = '';
+    for (let i = 0; i < Picture.all.length; i++) {
+        const itemPicture = Picture.all[i];
+        const itemPictureElem = document.createElement('li');
+        likesListELem.appendChild(itemPictureElem);
+        itemPictureElem.textContent = itemPicture.caption + ' : ' +
+        itemPicture.clickctr;
     }
 }
 
-image1.addEventListener('click', pictureClickHander);
+pickNewImages();
+console.log(totalClicks);
+console.log(maxClicks);
+
+if (totalClicks > maxClicks) {
+    alert('yo')
+}
+
+//     imageAllTag.removeEventListener('click', pictureClickHandler);
+//     alert('You are out of clicks.');
+//     renderLikes();
+// 
+
+
+imageAllTag.addEventListener('click', pictureClickHandler);
+renderLikes();

@@ -4,19 +4,39 @@ html {
 header h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
+    color: rgb(84, 2, 119);
+    padding-top: 35px;
+    padding-bottom: 35px;
+    background-color: rgb(248, 162, 205);
+    border: solid 5px hotpink
 }
 
 #three-images {
     display: flex;
 }
 
-.main-images {
+img {
     width: 250px;
     height: 250px;
     margin-left: 50px;
     margin-top: 50px;
+    border: solid 5px hotpink
 }
 
 div p {
     text-align: center;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    background: hotpink;
+    font-size: 24px;
+    color: rgb(51, 0, 73);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+main {
+    color: rgb(141, 5, 130);
 }

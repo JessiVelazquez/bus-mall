@@ -142,5 +142,22 @@ console.log(maxClicks);
 imageAllTag.addEventListener('click', pictureClickHandler);
 resultsButton.addEventListener('click', resultsClickHandler);
 
+function renderChart() {
+    const ctx = document.getElementById('canvas').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: imageNames,
+            datasets: [{
+                label: 'Bar Chart',
+                backgroundColor: 'rgb(98, 209, 243)',
+                borderColor: 'rgb(255, 105, 180)',
+                data: 
+            }]
+        },
+        options: {}
+    });
+}
+
 // call when done
-// renderChart
+renderChart();

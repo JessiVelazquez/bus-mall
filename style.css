@@ -4,11 +4,13 @@ html {
 header h1 {
     font-family: cursive;
     text-align: center;
+    text-shadow: 5px 5px 5px rgba(71, 61, 139, 0.616);
     color: rgb(84, 2, 119);
     padding-top: 35px;
     padding-bottom: 35px;
     background-color: rgb(248, 162, 205);
-    border: solid 5px hotpink
+    border: solid 5px hotpink;
+    border-radius: 10px;
 }
 
 main h2 {
@@ -16,15 +18,26 @@ main h2 {
 }
 
 #three-images {
-    display: flex
+    display: flex;
+    gap: 20px;
+
 }
 
 img {
     width: 250px;
     height: 250px;
+    min-width: 0;
     margin-left: 50px;
     margin-top: 50px;
-    border: solid 5px hotpink
+    border: solid 5px hotpink;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px darkslateblue;
+}
+
+img:hover {
+    box-shadow: 20px 20px 20px indigo;
+    width: 252px;
+    height: 252px;
 }
 
 div p {
@@ -56,7 +69,9 @@ main {
     padding-bottom: 30px;
     color: rgb(214, 9, 139);
     border: solid rgba(255, 105, 180, 0.561) 5px;
+    border-radius: 10px;
     font-family: cursive;
+    box-shadow: 10px 10px 10px rgba(148, 0, 211, 0.705);
 }
 
 #button {

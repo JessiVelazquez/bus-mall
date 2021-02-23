@@ -9,7 +9,7 @@ const imageTwoCaption = document.getElementById('image2-P');
 const imageThreeTag = document.getElementById('image3');
 const imageThreeCaption = document.getElementById('image3-P');
 
-const maxClicks = 5;
+const maxClicks = 26;
 let totalClicks = 0;
 
 //image/caption constructor function
@@ -105,6 +105,11 @@ function pictureClickHandler(event) {
     }
 
     pickNewImages();
+    if (totalClicks >= maxClicks) {
+        imageAllTag.removeEventListener('click', pictureClickHandler);
+        alert('You are out of clicks.');
+        renderLikes();
+    }
 }
 
 
@@ -123,15 +128,6 @@ function renderLikes() {
 pickNewImages();
 console.log(totalClicks);
 console.log(maxClicks);
-
-if (totalClicks > maxClicks) {
-    alert('yo')
-}
-
-//     imageAllTag.removeEventListener('click', pictureClickHandler);
-//     alert('You are out of clicks.');
-//     renderLikes();
-// 
 
 
 imageAllTag.addEventListener('click', pictureClickHandler);

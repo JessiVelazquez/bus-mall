@@ -2,7 +2,7 @@ html {
     background-color: lavenderblush;
 }
 header h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: cursive;
     text-align: center;
     color: rgb(84, 2, 119);
     padding-top: 35px;
@@ -11,8 +11,12 @@ header h1 {
     border: solid 5px hotpink
 }
 
+main h2 {
+    text-align: center;
+}
+
 #three-images {
-    display: flex;
+    display: flex
 }
 
 img {
@@ -25,6 +29,7 @@ img {
 
 div p {
     text-align: center;
+    font-size: 20px;
 }
 
 footer {
@@ -39,4 +44,36 @@ footer {
 
 main {
     color: rgb(141, 5, 130);
+    font-family: cursive;
+}
+
+#Results {
+    background-color: rgba(98, 209, 243, 0.445);
+    width: 200px;
+    margin: auto;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: rgb(214, 9, 139);
+    border: solid rgba(255, 105, 180, 0.561) 5px;
+    font-family: cursive;
+}
+
+#button {
+    background-color: rgba(255, 105, 193, 0.726);
+    border: solid rgb(233, 14, 178);
+    font-family: cursive;
+    color: rgb(115, 0, 119);
+    font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 20px;
+}
+
+#button:hover {
+    background-color: rgb(235, 28, 107);
+    color: white;
+    border: solid lightseagreen
 }

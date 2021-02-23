@@ -8,6 +8,7 @@ const imageTwoTag = document.getElementById('image2');
 const imageTwoCaption = document.getElementById('image2-P');
 const imageThreeTag = document.getElementById('image3');
 const imageThreeCaption = document.getElementById('image3-P');
+const resultsButton = document.getElementById('button')
 
 const maxClicks = 26;
 let totalClicks = 0;
@@ -108,7 +109,6 @@ function pictureClickHandler(event) {
     if (totalClicks >= maxClicks) {
         imageAllTag.removeEventListener('click', pictureClickHandler);
         alert('You are out of clicks.');
-        renderLikes();
     }
 }
 
@@ -120,9 +120,13 @@ function renderLikes() {
         const itemPicture = Picture.all[i];
         const itemPictureElem = document.createElement('li');
         likesListELem.appendChild(itemPictureElem);
-        itemPictureElem.textContent = itemPicture.caption + ' : ' +
-        itemPicture.clickctr;
+        itemPictureElem.textContent = itemPicture.caption + ': ' +
+        itemPicture.clickctr + '/' + itemPicture.displayctr;
     }
+}
+
+function resultsClickHandler(event) {
+    renderLikes();
 }
 
 pickNewImages();
@@ -131,4 +135,4 @@ console.log(maxClicks);
 
 
 imageAllTag.addEventListener('click', pictureClickHandler);
-renderLikes();
+resultsButton.addEventListener('click', resultsClickHandler)

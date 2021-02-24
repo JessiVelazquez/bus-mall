@@ -75,6 +75,10 @@ main {
     box-shadow: 10px 10px 10px rgba(148, 0, 211, 0.705);
 }
 
+#dataCharts {
+    margin-top: 50px;
+}
+
 #button {
     background-color: rgba(255, 105, 193, 0.726);
     border: solid rgb(233, 14, 178);

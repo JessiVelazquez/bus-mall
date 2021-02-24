@@ -13,7 +13,9 @@ const imageTwoTag = document.getElementById('image2');
 const imageTwoCaption = document.getElementById('image2-P');
 const imageThreeTag = document.getElementById('image3');
 const imageThreeCaption = document.getElementById('image3-P');
-const resultsButton = document.getElementById('button')
+const resultsSection = document.getElementById('Results');
+const resultsButton = document.getElementById('button');
+const chartsSection = document.getElementById('dataCharts');
 
 const maxClicks = 26;
 let totalClicks = 0;
@@ -114,9 +116,11 @@ function pictureClickHandler(event) {
     if (totalClicks >= maxClicks) {
         imageAllTag.removeEventListener('click', pictureClickHandler);
         alert('You are out of clicks.');
+        resultsButton.style.display = 'block';
+        resultsSection.style.display = 'block';
+        chartsSection.style.display = 'block';
     }
 }
-
 
 function renderLikes() {
     const likesListELem = document.getElementById('Results');
@@ -132,6 +136,7 @@ function renderLikes() {
 
 function resultsClickHandler(event) {
     renderLikes();
+    renderChart();
 }
 
 pickNewImages();
@@ -143,21 +148,44 @@ imageAllTag.addEventListener('click', pictureClickHandler);
 resultsButton.addEventListener('click', resultsClickHandler);
 
 function renderChart() {
+
+    const clicks = []
+    const displays = []
+    for (let i = 0; i < Picture.all.length; i++) {
+        const clickCount = Picture.all[i].clickctr;
+        const displayCount = Picture.all[i].displayctr;
+        clicks.push(clickCount);
+        displays.push(displayCount);
+    }
+
     const ctx = document.getElementById('canvas').getContext('2d');
     const chart = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
             labels: imageNames,
             datasets: [{
-                label: 'Bar Chart',
+                label: 'Times User Clicked Image',
+                backgroundColor: 'rgb(255, 105, 180)',
+                borderColor: 'rgb(255, 105, 180)',
+                data: clicks,
+            },
+            {
+                label: 'Times Shown to User',
                 backgroundColor: 'rgb(98, 209, 243)',
                 borderColor: 'rgb(255, 105, 180)',
-                data: 
-            }]
+                data: displays,
+        }]
         },
         options: {}
     });
 }
 
+resultsButton.style.display = 'none';
+resultsSection.style.display = 'none';
+chartsSection.style.display = 'none';
+
 // call when done
-renderChart();
+
+
+
+

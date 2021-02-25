@@ -169,18 +169,21 @@ function renderChart() {
 
     const clicks = []
     const displays = []
+    const titles = []
     for (let i = 0; i < Picture.all.length; i++) {
         const clickCount = Picture.all[i].clickctr;
         const displayCount = Picture.all[i].displayctr;
+        const caption = Picture.all[i].caption;
         clicks.push(clickCount);
         displays.push(displayCount);
+        titles.push(caption);
     }
 
     const ctx = document.getElementById('canvas').getContext('2d');
     const chart = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
-            labels: imageNames,
+            labels: titles,
             datasets: [{
                 label: 'Times User Clicked Image',
                 backgroundColor: 'rgb(255, 105, 180)',

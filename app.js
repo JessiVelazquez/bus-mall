@@ -5,7 +5,7 @@ const imageNames = ['boots', 'dog-duck', 'tauntaun', 'breakfast', 'bathroom', 'b
 // no repeat test:
 // const imageNames = ['boots', 'dog-duck', 'tauntaun', 'breakfast', 'bathroom', 'bubblegum']
 
-//set these at top for easy/safe use later in script
+//Globals
 const imageAllTag = document.getElementById('three-images');
 const imageOneTag = document.getElementById('image1');
 const imageOneCaption = document.getElementById('image1-P');
@@ -33,14 +33,31 @@ function Picture(caption, url) {
 //declares empty array to be pushed to later
 Picture.all = [];
 
-function createImages() {
+function createImagesFromScratch() {
     for (let i = 0; i < imageNames.length; i++) {
         const imageName = imageNames[i];
         new Picture(imageName, './img/' + imageName + '.jpg');
     }
 }
 
-createImages()
+function createImagesFromStorage(storageGet) {
+    const javaScriptImages = JSON.parse(storageGet);
+    for (let i = 0; i < javaScriptImages.length; i++) {
+        const rawData = javaScriptImages[i];
+        const newPictureInst = new Picture(rawData.caption, rawData.url);
+        newPictureInst.clickctr = rawData.clickctr;
+        newPictureInst.displayctr = rawData.displayctr;
+    }
+}
+
+function createPictureInstances() {
+    const storageGet = localStorage.getItem('images');
+    if (storageGet === null) {
+        createImagesFromScratch();
+    } else {
+        createImagesFromStorage(storageGet);
+    }
+}
 
 //will be defined soon
 let leftImageObject = null;
@@ -119,6 +136,9 @@ function pictureClickHandler(event) {
         resultsButton.style.display = 'block';
         resultsSection.style.display = 'block';
         chartsSection.style.display = 'block';
+
+        const JSONImages = JSON.stringify(Picture.all)
+        localStorage.setItem('images', JSONImages);
     }
 }
 
@@ -139,9 +159,7 @@ function resultsClickHandler(event) {
     renderChart();
 }
 
-pickNewImages();
-console.log(totalClicks);
-console.log(maxClicks);
+
 
 
 imageAllTag.addEventListener('click', pictureClickHandler);
@@ -184,8 +202,7 @@ resultsButton.style.display = 'none';
 resultsSection.style.display = 'none';
 chartsSection.style.display = 'none';
 
-// call when done
-
-
+createPictureInstances();
+pickNewImages();
 
 

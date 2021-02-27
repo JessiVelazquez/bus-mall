@@ -2,8 +2,6 @@
 
 const imageNames = ['boots', 'dog-duck', 'tauntaun', 'breakfast', 'bathroom', 'bubblegum', 'chair', 'pet-sweep', 'scissors', 'water-can', 'wine-glass', 'bag', 'banana', 'cthulhu', 'dragon', 'pen', 'shark', 'sweep', 'unicorn', 'usb']
 
-// no repeat test:
-// const imageNames = ['boots', 'dog-duck', 'tauntaun', 'breakfast', 'bathroom', 'bubblegum']
 
 //Globals
 const imageAllTag = document.getElementById('three-images');
@@ -21,7 +19,7 @@ const chartsSection = document.getElementById('dataCharts');
 const maxClicks = 26;
 let totalClicks = 0;
 
-//image/caption constructor function
+//Image and Caption Constructor Function
 function Picture(caption, url) {
     this.caption = caption;
     this.url = url;
@@ -31,8 +29,12 @@ function Picture(caption, url) {
     Picture.all.push(this);
 };
 
-//declares empty array to be pushed to later
+//Empty array - will be pushed to later
 Picture.all = [];
+
+
+
+//Main functions
 
 function createImagesFromScratch() {
     for (let i = 0; i < imageNames.length; i++) {
@@ -60,7 +62,7 @@ function createPictureInstances() {
     }
 }
 
-//will be defined soon
+//These will be defined soon
 let leftImageObject = null;
 let centerImageObject = null;
 let rightImageObject = null;
@@ -161,10 +163,12 @@ function resultsClickHandler(event) {
     renderChart();
 }
 
+// Click handlers
 
 imageAllTag.addEventListener('click', pictureClickHandler);
 resultsButton.addEventListener('click', resultsClickHandler);
 
+// Chart rendering
 
 function renderChart() {
 
@@ -205,6 +209,8 @@ function renderChart() {
 resultsButton.style.display = 'none';
 resultsSection.style.display = 'none';
 chartsSection.style.display = 'none';
+
+// Baseline Executables
 
 createPictureInstances();
 pickNewImages();

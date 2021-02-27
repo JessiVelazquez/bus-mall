@@ -17,6 +17,7 @@ const resultsSection = document.getElementById('Results');
 const resultsButton = document.getElementById('button');
 const chartsSection = document.getElementById('dataCharts');
 
+
 const maxClicks = 26;
 let totalClicks = 0;
 
@@ -102,6 +103,7 @@ function pickNewImages() {
 }
 
 
+
 function renderNewImages() {
     imageOneTag.src = leftImageObject.url;
     imageOneTag.alt = leftImageObject.caption;
@@ -160,10 +162,9 @@ function resultsClickHandler(event) {
 }
 
 
-
-
 imageAllTag.addEventListener('click', pictureClickHandler);
 resultsButton.addEventListener('click', resultsClickHandler);
+
 
 function renderChart() {
 
